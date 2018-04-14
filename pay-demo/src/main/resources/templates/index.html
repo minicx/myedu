@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+    <meta charset="UTF-8"/>
+    <title>API DEMO</title>
+</head>
+
+<body>
+<div class="contentDiv">
+
+    <legend>
+        <strong>API测试DEMO</strong>
+    </legend>
+
+    <form th:action="@{/{action}(action=${action})}" method="post" class="form-horizontal">
+
+        <!--<input type="hidden" name="id" th:value="${book.id}"/>-->
+
+        <div class="form-group">
+            <label for="method" class="col-sm-2 control-label">支付方式:</label>
+            <div class="col-xs-4">
+                <!--<input type="text" class="form-control" id="method" name="method" th:value="${payDto.payMethod}"-->
+                       <!--th:field="*{payDto.payMethod}"/>-->
+                <select class="form-control" id="method" name="method" th:value="${payDto.payMethod}" th:field="*{payDto.payMethod}">
+                    <option value="">请选择</option>
+                    <option value="WXSM">微信扫码</option>
+                    <option value="WXH5">微信H5</option>
+                    <option value="ALIPAYSM">支付宝扫码</option>
+                    <option value="ALIPAYH5">支付宝H5</option>
+                    <option value="QQSM">QQ扫码</option>
+                    <option value="BSM">银联扫码</option>
+                    <option value="JDSM">京东扫码</option>
+                    <option value="ICBC">中国工商银行</option>
+                    <option value="CMBCHINA">招商银行</option>
+                    <option value="ABC">中国农业银行</option>
+                    <option value="CCB">中国建设银行</option>
+                    <option value="BCCB">北京银行</option>
+                    <option value="CMBC">中国民生银行</option>
+                    <option value="CEB">中国光大银行</option>
+                    <option value="BOC">中国银行</option>
+                    <option value="PINGANBANK">平安银行</option>
+                    <option value="ECITIC">中信银行</option>
+                    <option value="GDB">广东发展银行</option>
+                    <option value="POST">邮政储蓄</option>
+                    <option value="HXB">华夏银行</option>
+                    <option value="BOCO">交通银行</option>
+                    <option value="CIB">兴业银行</option>
+                    <option value="SPDB">上海浦东发展银行</option>
+                    <option value="SDB">深圳发展银行</option>
+                    <option value="CBHB">渤海银行</option>
+                    <option value="HKBEA">东亚银行</option>
+                    <option value="HZBANK">杭州银行</option>
+                    <option value="NJCB">南京银行</option>
+                    <option value="SHB">上海银行</option>
+                    <option value="CZ">浙商银行</option>
+                    <option value="KJZF">快捷支付</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="amout" class="col-sm-2 control-label">支付金额:</label>
+            <div class="col-xs-4">
+                <input type="text" class="form-control" id="amout" name="amout" th:value="${payDto.amout}"
+                       th:field="*{payDto.amout}"/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="cardNo" class="col-sm-2 control-label">银行卡号:</label>
+            <div class="col-xs-4">
+                <input  type="text" class="form-control" id="cardNo"  name="cardNo"
+                          th:value="${payDto.cardNo}" th:field="*{payDto.cardNo}"></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label colspan="2" class="col-sm-2 control-label"  style="color: red">快捷支付必填</label>
+        </div>
+
+        <div class="form-group">
+            <label for="app" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <select class="form-control" id="app"  name="app"
+                        th:value="${payDto.app}" th:field="*{payDto.app}">
+                    <option value="">否</option>
+                    <option value="app">是</option>
+                </select>(只支持扫码)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;&nbsp;
+                <input class="btn" type="button" value="返回" onclick="history.back()"/>
+                <!--<input class="btn" type="button" value="历史记录" onclick="history.back()"/>-->
+                <td><a class="btn btn-danger" th:href="@{/list}">历史记录</a></td>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

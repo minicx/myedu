@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+    <meta charset="UTF-8"/>
+    <title>API DEMO</title>
+</head>
+
+<body>
+<div class="contentDiv">
+
+    <legend>
+        <strong>API测试DEMO</strong>
+    </legend>
+
+
+    <div class="form-group">
+        <label for="amout" class="col-sm-2 control-label">支付结果:</label>
+        <textarea class="form-control"  id="amout" name="amout" th:text="${result}"/>
+    </div>
+    <div><a class="btn btn-primary" role="button" onclick="history.back()">返回</a></div>
+</div>
+</body>
+</html>
