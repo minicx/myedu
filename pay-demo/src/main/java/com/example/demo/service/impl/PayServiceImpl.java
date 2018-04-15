@@ -24,11 +24,13 @@ import java.util.*;
 @Service
 public class PayServiceImpl implements PayService {
 
-    @Value("key")
-    private String key = "C89C2D1BCAF9CA258A34E59DD4BF4668";
+    @Value("${key}")
+    private String key;
+    // = "C89C2D1BCAF9CA258A34E59DD4BF4668";
     // 商户ID.
-    @Value("merno")
-    private String merno = "1256060676";
+    @Value("${merno}")
+    private String merno;
+    // = "1256060676";
 
     @Autowired
     PayRepository payRepository;
@@ -83,13 +85,13 @@ public class PayServiceImpl implements PayService {
 //        String billNo = UUID.randomUUID().toString().replaceAll("-", "");
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
         String time = format.format(new Date());
-        builder.append("#").append("032922071312160106229758x");
+        builder.append("#").append(billNo);
         builder.append("#").append(merno);
         builder.append("#").append(time).append("#").append(key);
         String x6 = PayUtil.EncodingMD5(builder.toString());
         Map<String, String> map = new TreeMap<String, String>();
         map.put("trxType", "REQ_BankOrderQuery");
-        map.put("r1_orderNumber", "032922071312160106229758x");
+        map.put("r1_orderNumber", billNo);
         map.put("merchantNo", merno);
 
         map.put("timestamp", time);

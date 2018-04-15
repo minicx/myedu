@@ -29,13 +29,6 @@ public class PayController {
     private PayService payService;
 
 
-    @RequestMapping("get")
-    public String get() throws Exception {
-        String str = HttpAPIService.doGet("http://www.baidu.com");
-        System.out.println(str);
-        return "hello";
-    }
-
     /**
      * 跳转到主页
      */
