@@ -43,11 +43,11 @@ public class PayServiceImpl implements PayService {
     @Override
     public JsonObject pay(PayDto payDto) {
         StringBuilder builder = new StringBuilder();
-        builder.append("X1_Amount").append(PayConstants.EQU).append(payDto.getAmout()).append(PayConstants.AND);
+        builder.append("X1_Amount").append(PayConstants.EQU).append(String.valueOf(payDto.getAmout())).append(PayConstants.AND);
         String billNo = UUID.randomUUID().toString().replaceAll("-", "");
         builder.append("X2_BillNo").append(PayConstants.EQU).append(billNo).append(PayConstants.AND);
         builder.append("X3_MerNo").append(PayConstants.EQU).append(merno).append(PayConstants.AND);
-        builder.append("X4_ReturnURL").append(PayConstants.EQU).append("http://mystore.com/payresult").append(PayConstants.AND);
+        builder.append("X4_ReturnURL").append(PayConstants.EQU).append("http://118.25.52.126:8080/returnUrl").append(PayConstants.AND);
         String x6 = PayUtil.EncodingMD5(builder.toString() + PayUtil.EncodingMD5(key).toUpperCase()).toUpperCase();
 
         payDto.setBillNo(billNo);
@@ -56,9 +56,9 @@ public class PayServiceImpl implements PayService {
         map.put("X1_Amount", String.valueOf(payDto.getAmout()));
         map.put("X2_BillNo", billNo);
         map.put("X3_MerNo", merno);
-        map.put("X4_ReturnURL", "http://mystore.com/payresult");
+        map.put("X4_ReturnURL", "http://118.25.52.126:8080/returnUrl");
         map.put("X6_MD5info", x6);
-        map.put("X5_NotifyURL", "");
+        map.put("X5_NotifyURL", "http://118.25.52.126:8080/notify");
         map.put("X7_PaymentType", String.valueOf(payDto.getPayMethod()));
         map.put("X8_MerRemark", "1");
         map.put("X9_ClientIp", "");
@@ -68,6 +68,7 @@ public class PayServiceImpl implements PayService {
         String httpResult = null;
         JsonObject obj = null;
         try {
+//            httpResult = HttpUtil.post(map,"http://bq.baiqianpay.com/webezf/web/?app_act=openapi/bq_pay/pay" );
             httpResult = HttpUtil.post("https://bq.baiqianpay.com/webezf/web/?app_act=openapi/bq_pay/pay", map, 2);
             System.out.println("返回参数：" + httpResult);
             obj = (JsonObject) new Gson().fromJson(httpResult, JsonObject.class);

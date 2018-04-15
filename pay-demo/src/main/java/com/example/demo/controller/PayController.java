@@ -2,7 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.config.PayConstants;
 import com.example.demo.config.PayUtil;
+import com.example.demo.dto.NotifyDto;
 import com.example.demo.dto.PayDto;
+import com.example.demo.dto.ReturnDto;
 import com.example.demo.http.HttpAPIService;
 import com.example.demo.http.HttpUtil;
 import com.example.demo.service.PayService;
@@ -65,6 +67,21 @@ public class PayController {
         map.addAttribute("result", jsonObject.toString());
         return "result";
     }
+
+
+    @RequestMapping(value = "/notify", method = RequestMethod.GET)
+    public String notify(@PathVariable NotifyDto notifyDto, ModelMap map) throws Exception {
+        System.out.println(notifyDto);
+        return "result";
+    }
+
+    @RequestMapping(value = "/returnUrl", method = RequestMethod.GET)
+    public String notify(@PathVariable ReturnDto returnDto, ModelMap map) throws Exception {
+        System.out.println(returnDto);
+        return "result";
+    }
+
+
 
     public static void main(String[] args) throws Exception {
 
