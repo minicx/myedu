@@ -30,6 +30,12 @@ public class PayController {
     @Resource
     private PayService payService;
 
+    @Value("${merno}")
+    private String merno;
+
+    @Value("${key}")
+    private String key;
+
 
     /**
      * 跳转到主页
@@ -48,11 +54,37 @@ public class PayController {
      * @return
      * @throws Exception
      */
+//    @RequestMapping(value = "/pay", method = RequestMethod.POST)
+//    public String pay(@ModelAttribute PayDto payDto, ModelMap map) throws Exception {
+//        JsonObject jsonObject =  payService.pay(payDto);
+//        map.addAttribute("result", jsonObject.toString());
+//        return "result";
+//    }
+
     @RequestMapping(value = "/pay", method = RequestMethod.POST)
     public String pay(@ModelAttribute PayDto payDto, ModelMap map) throws Exception {
-        JsonObject jsonObject =  payService.pay(payDto);
-        map.addAttribute("result", jsonObject.toString());
-        return "result";
+        StringBuilder builder = new StringBuilder();
+        builder.append("X1_Amount").append(PayConstants.EQU).append(String.valueOf(payDto.getAmout())).append(PayConstants.AND);
+        String billNo = UUID.randomUUID().toString().replaceAll("-", "");
+        builder.append("X2_BillNo").append(PayConstants.EQU).append(billNo).append(PayConstants.AND);
+        builder.append("X3_MerNo").append(PayConstants.EQU).append(merno).append(PayConstants.AND);
+        builder.append("X4_ReturnURL").append(PayConstants.EQU).append("http://118.25.52.126:8080/returnUrl").append(PayConstants.AND);
+        String x6 = PayUtil.EncodingMD5(builder.toString() + PayUtil.EncodingMD5(key).toUpperCase()).toUpperCase();
+
+        map.addAttribute("action", "http://bq.baiqianpay.com/webezf/web/?app_act=openapi/bq_pay/pay");
+        map.addAttribute("X1_Amount", String.valueOf(payDto.getAmout()));
+        map.addAttribute("X2_BillNo", billNo);
+        map.addAttribute("X3_MerNo", merno);
+        map.addAttribute("X4_ReturnURL", "http://118.25.52.126:8080/returnUrl");
+        map.addAttribute("X6_MD5info", x6);
+        map.addAttribute("X5_NotifyURL", "http://118.25.52.126:8080/notify");
+        map.addAttribute("X7_PaymentType", String.valueOf(payDto.getPayMethod()));
+        map.addAttribute("X8_MerRemark", "1");
+        map.addAttribute("X9_ClientIp", "");
+        map.addAttribute("isApp", String.valueOf(payDto.getApp()));
+        System.out.println("参与签名：" + builder);
+        System.out.println("上行参数：" + map);
+        return "pay";
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)

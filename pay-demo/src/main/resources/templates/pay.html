@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <script type="text/javascript" th:src="@{https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js}"></script>
+    <link th:href="@{https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/default.css}" rel="stylesheet"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
+    <meta charset="UTF-8"/>
+    <title>API DEMO</title>
+</head>
+
+<body>
+<div class="contentDiv">
+
+    <legend>
+        <strong>API测试DEMO</strong>
+    </legend>
+    <!--@{/{action}(action=${action})}-->
+    <form th:action="${action}" method="post" class="form-horizontal">
+
+        <!--<input type="hidden" name="id" th:value="${book.id}"/>-->
+
+        <div class="form-group">
+            <label for="X1_Amount" class="col-sm-2 control-label">支付方式:</label>
+                <input  id="X1_Amount" name="X1_Amount" th:value="${X1_Amount}"
+                />
+        </div>
+
+        <div class="form-group">
+            <label for="X2_BillNo" class="col-sm-2 control-label">支付金额:</label>
+                <input type="text" id="X2_BillNo" name="X2_BillNo"
+                       th:value="${X2_BillNo}"
+
+                />
+        </div>
+
+        <div class="form-group">
+            <label for="X3_MerNo" class="col-sm-2 control-label">银行卡号:</label>
+            <div class="col-xs-4">
+                <input  id="X3_MerNo" name="X3_MerNo"
+                       th:value="${X3_MerNo}"
+                      ></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label colspan="2" class="col-sm-2 control-label" style="color: red">快捷支付必填</label>
+        </div>
+
+        <div class="form-group">
+            <label for="X4_ReturnURL" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <input  id="X4_ReturnURL" name="X4_ReturnURL"
+                        th:value="${X4_ReturnURL}"
+                      ></input>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="X6_MD5info" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <input  id="X6_MD5info" name="X6_MD5info"
+                        th:value="${X6_MD5info}"
+                       ></input>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="X5_NotifyURL" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <input  id="X5_NotifyURL" name="X5_NotifyURL"
+                        th:value="${X5_NotifyURL}"
+                      ></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="X7_PaymentType" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <input  id="X7_PaymentType" name="X7_PaymentType"
+                        th:value="${X7_PaymentType}"
+                       ></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="X8_MerRemark" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <input  id="X8_MerRemark" name="X8_MerRemark"
+                        th:value="${X8_MerRemark}"
+                       ></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="X9_ClientIp" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <input  id="X9_ClientIp" name="X9_ClientIp"
+                        th:value="${X9_ClientIp}"
+                     ></input>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="isApp" class="col-sm-2 control-label">是否APP:</label>
+            <div class="col-xs-4">
+                <input  id="isApp" name="isApp"
+                        th:value="${isApp}"
+                       ></input>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;&nbsp;
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

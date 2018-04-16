@@ -69,7 +69,7 @@ public class PayServiceImpl implements PayService {
         JsonObject obj = null;
         try {
 //            httpResult = HttpUtil.post(map,"http://bq.baiqianpay.com/webezf/web/?app_act=openapi/bq_pay/pay" );
-            httpResult = HttpUtil.post("https://bq.baiqianpay.com/webezf/web/?app_act=openapi/bq_pay/pay", map, 2);
+            httpResult = HttpUtil.post("http://192.168.31.194/webezf/web/?app_act=openapi/bq_pay/pay", map, 1);
             System.out.println("返回参数：" + httpResult);
             obj = (JsonObject) new Gson().fromJson(httpResult, JsonObject.class);
         } catch (Exception e) {
