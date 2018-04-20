@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.config.PayConstants;
 import com.example.demo.config.PayUtil;
+import com.example.demo.dao.PayRepository;
 import com.example.demo.dto.NotifyDto;
 import com.example.demo.dto.PayDto;
 import com.example.demo.dto.ReturnDto;
@@ -9,6 +10,7 @@ import com.example.demo.http.HttpAPIService;
 import com.example.demo.http.HttpUtil;
 import com.example.demo.service.PayService;
 import com.google.gson.JsonObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -35,6 +37,9 @@ public class PayController {
 
     @Value("${key}")
     private String key;
+
+    @Autowired
+    PayRepository payRepository;
 
 
     /**
@@ -71,6 +76,8 @@ public class PayController {
         builder.append("X4_ReturnURL").append(PayConstants.EQU).append("http://118.25.52.126:8080/returnUrl").append(PayConstants.AND);
         String x6 = PayUtil.EncodingMD5(builder.toString() + PayUtil.EncodingMD5(key).toUpperCase()).toUpperCase();
 
+        payDto.setBillNo(billNo);
+        payRepository.save(payDto);
         map.addAttribute("action", "http://bq.baiqianpay.com/webezf/web/?app_act=openapi/bq_pay/pay");
         map.addAttribute("X1_Amount", String.valueOf(payDto.getAmout()));
         map.addAttribute("X2_BillNo", billNo);
