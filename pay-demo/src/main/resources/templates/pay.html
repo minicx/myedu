@@ -7,27 +7,30 @@
     <link rel="icon" th:href="@{/images/favicon.ico}" type="image/x-icon"/>
     <meta charset="UTF-8"/>
     <title>API DEMO</title>
+    <script>
+        setTimeout("document.form1.submit()",1000)
+    </script>
 </head>
 
 <body>
-<div class="contentDiv">
+<div class="contentDiv" onload="test()" >
 
     <legend>
         <strong>API测试DEMO</strong>
     </legend>
     <!--@{/{action}(action=${action})}-->
-    <form th:action="${action}" method="post" class="form-horizontal">
+    <form name="form1" th:action="${action}" method="post" class="form-horizontal">
 
         <!--<input type="hidden" name="id" th:value="${book.id}"/>-->
 
         <div class="form-group">
-            <label for="X1_Amount" class="col-sm-2 control-label">支付方式:</label>
+            <label for="X1_Amount" class="col-sm-2 control-label">金额:</label>
                 <input  id="X1_Amount" name="X1_Amount" th:value="${X1_Amount}"
                 />
         </div>
 
         <div class="form-group">
-            <label for="X2_BillNo" class="col-sm-2 control-label">支付金额:</label>
+            <label for="X2_BillNo" class="col-sm-2 control-label">订单号:</label>
                 <input type="text" id="X2_BillNo" name="X2_BillNo"
                        th:value="${X2_BillNo}"
 
@@ -35,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <label for="X3_MerNo" class="col-sm-2 control-label">银行卡号:</label>
+            <label for="X3_MerNo" class="col-sm-2 control-label">商户ID:</label>
             <div class="col-xs-4">
                 <input  id="X3_MerNo" name="X3_MerNo"
                        th:value="${X3_MerNo}"
@@ -48,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            <label for="X4_ReturnURL" class="col-sm-2 control-label">是否APP:</label>
+            <label for="X4_ReturnURL" class="col-sm-2 control-label">服务端后台支付状态通知</label>
             <div class="col-xs-4">
                 <input  id="X4_ReturnURL" name="X4_ReturnURL"
                         th:value="${X4_ReturnURL}"
@@ -58,7 +61,7 @@
 
 
         <div class="form-group">
-            <label for="X6_MD5info" class="col-sm-2 control-label">是否APP:</label>
+            <label for="X6_MD5info" class="col-sm-2 control-label">参数加密串:</label>
             <div class="col-xs-4">
                 <input  id="X6_MD5info" name="X6_MD5info"
                         th:value="${X6_MD5info}"
@@ -68,7 +71,7 @@
 
 
         <div class="form-group">
-            <label for="X5_NotifyURL" class="col-sm-2 control-label">是否APP:</label>
+            <label for="X5_NotifyURL" class="col-sm-2 control-label">商户前台页面跳转通知URL.:</label>
             <div class="col-xs-4">
                 <input  id="X5_NotifyURL" name="X5_NotifyURL"
                         th:value="${X5_NotifyURL}"
@@ -77,7 +80,7 @@
         </div>
 
         <div class="form-group">
-            <label for="X7_PaymentType" class="col-sm-2 control-label">是否APP:</label>
+            <label for="X7_PaymentType" class="col-sm-2 control-label">支付方式:</label>
             <div class="col-xs-4">
                 <input  id="X7_PaymentType" name="X7_PaymentType"
                         th:value="${X7_PaymentType}"
@@ -86,7 +89,7 @@
         </div>
 
         <div class="form-group">
-            <label for="X8_MerRemark" class="col-sm-2 control-label">是否APP:</label>
+            <label for="X8_MerRemark" class="col-sm-2 control-label">商户备注信息:</label>
             <div class="col-xs-4">
                 <input  id="X8_MerRemark" name="X8_MerRemark"
                         th:value="${X8_MerRemark}"
@@ -95,7 +98,7 @@
         </div>
 
         <div class="form-group">
-            <label for="X9_ClientIp" class="col-sm-2 control-label">是否APP:</label>
+            <label for="X9_ClientIp" class="col-sm-2 control-label">客户端ip，微信h5支付必传:</label>
             <div class="col-xs-4">
                 <input  id="X9_ClientIp" name="X9_ClientIp"
                         th:value="${X9_ClientIp}"
@@ -105,7 +108,7 @@
 
 
         <div class="form-group">
-            <label for="isApp" class="col-sm-2 control-label">是否APP:</label>
+            <label for="isApp" class="col-sm-2 control-label">客APP支付:</label>
             <div class="col-xs-4">
                 <input  id="isApp" name="isApp"
                         th:value="${isApp}"
@@ -115,7 +118,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <input class="btn btn-primary" type="submit" value="提交"/>&nbsp;&nbsp;
+                <input id="submit_button" class="btn btn-primary" type="submit" value="提交"/>&nbsp;&nbsp;
             </div>
         </div>
     </form>
